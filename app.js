@@ -1,7 +1,6 @@
 // Currency Converter
 
-const BASE_URL = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/";
-
+const BASE_URL = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/";
 const dropdownSel = document.querySelectorAll(".dropdown select");
 const btn = document.querySelector("form button");
 const msg = document.querySelector(".msg");
@@ -47,11 +46,12 @@ const updateExchangeRate = async () => {
     let fromCurr = dropdownSel[0].value.toLowerCase();
     let toCurr = dropdownSel[1].value.toLowerCase();
 
-    const URL = `${BASE_URL}${fromCurr}/${toCurr}.json`;
+    const URL = `${BASE_URL}${fromCurr}.json`;
 
     const response = await fetch(URL);
     let data = await response.json();
-    let exRate = data[toCurr];
+    let exRate = data[fromCurr][toCurr];
+    // console.log(exRate);
 
     let resultAmount = amountVal * exRate;
 
